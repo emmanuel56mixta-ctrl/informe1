@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="es"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Estrategia de Alfabetización Digital - Informe 2025&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar-item-active { background-color: #e5e7eb; border-right: 4px solid #1e40af; color: #1e40af; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card { background: white; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-primary { background-color: #1e40af; color: white; transition: background 0.3s; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-primary:hover { background-color: #1e3a8a; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab-content { display: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.tab-content.active { display: block; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.funnel-step { position: relative; padding: 1rem; border-radius: 0.5rem; text-align: center; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.funnel-arrow::after { content: '→'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-weight: bold; color: #cbd5e1; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px) { .funnel-arrow::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -25px; transform: translateX(-50%); } }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="text-slate-800"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Navbar --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;nav class="bg-white border-b border-gray-200 fixed w-full z-30 top-0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="px-6 py-3 flex items-center justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="bg-blue-800 p-2 rounded-lg mr-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-microchip text-white"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h1 class="text-lg font-bold text-slate-900 leading-tight"&gt;Estrategia de Alfabetización Digital&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-xs text-slate-500 uppercase tracking-wider font-semibold"&gt;Jalisco 2025 | Informe Estratégico&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex items-center space-x-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="text-sm font-bold text-blue-800 hover:text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-file-pdf mr-1"&gt;&lt;/i&gt; Informe Final</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="flex pt-16"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Sidebar Navigation --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;aside class="w-64 bg-white h-screen fixed border-r border-gray-200 hidden md:block"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="p-4 space-y-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-[10px] font-bold text-gray-400 uppercase px-3 py-2"&gt;Estructura del Informe&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="switchTab('resumen')" id="nav-resumen" class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg sidebar-item-active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-home mr-3"&gt;&lt;/i&gt; Panel Estratégico</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="switchTab('proyectos')" id="nav-proyectos" class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-play-circle mr-3"&gt;&lt;/i&gt; Repositorio de Video</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="switchTab('numeralia')" id="nav-numeralia" class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-table mr-3"&gt;&lt;/i&gt; Numeralia Detallada</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button onclick="switchTab('logros')" id="nav-logros" class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-trophy mr-3"&gt;&lt;/i&gt; Logros y Retos</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/aside&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Main Content --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;main class="flex-grow md:ml-64 p-6 md:p-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Tab: Panel Estratégico --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="resumen" class="tab-content active space-y-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- 1. Strategic KPIs --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 md:grid-cols-4 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="card p-6 bg-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-center justify-between mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded uppercase"&gt;Cifra Estatal&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-users text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-3xl font-extrabold text-slate-900 tracking-tight"&gt;11,956&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs font-semibold text-slate-500 uppercase mt-1"&gt;Personas Capacitadas&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="card p-6 bg-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-center justify-between mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded uppercase"&gt;Eje Prioritario&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-brain text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-3xl font-extrabold text-slate-900 tracking-tight"&gt;9,778&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs font-semibold text-slate-500 uppercase mt-1"&gt;Formados en IA&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="card p-6 bg-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-center justify-between mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded uppercase"&gt;Infraestructura&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-chalkboard text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-3xl font-extrabold text-slate-900 tracking-tight"&gt;81&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs font-semibold text-slate-500 uppercase mt-1"&gt;Cursos Impartidos&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="card p-6 bg-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-center justify-between mb-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded uppercase"&gt;Alcance Digital&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-signal text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-3xl font-extrabold text-slate-900 tracking-tight"&gt;138,306&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs font-semibold text-slate-500 uppercase mt-1"&gt;Vistas en Streaming&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- 2. The Strategic Sense: Transformation Funnel --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="card p-8 bg-white overflow-hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6"&gt;El Sentido de la Estrategia: Embudo de Transformación Digital&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Step 1 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="funnel-step bg-slate-50 border border-slate-200 funnel-arrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-blue-600 text-2xl mb-2"&gt;&lt;i class="fas fa-bullhorn"&gt;&lt;/i&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-bold text-sm"&gt;DIFUSIÓN MASIVA&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-[11px] text-slate-500 mt-1"&gt;Streaming y webinars para sensibilizar a toda la estructura educativa.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="block mt-3 text-lg font-bold text-slate-700"&gt;138k+ Impactos&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Step 2 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="funnel-step bg-blue-50 border border-blue-100 funnel-arrow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-blue-800 text-2xl mb-2"&gt;&lt;i class="fas fa-user-edit"&gt;&lt;/i&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-bold text-sm"&gt;CAPACITACIÓN DIRECTA&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-[11px] text-slate-500 mt-1"&gt;Especialización técnica en IA y alfabetización digital en sitio.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="block mt-3 text-lg font-bold text-blue-800"&gt;11,956 Formados&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Step 3 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="funnel-step bg-emerald-50 border border-emerald-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-emerald-700 text-2xl mb-2"&gt;&lt;i class="fas fa-certificate"&gt;&lt;/i&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-bold text-sm"&gt;ESPECIALIZACIÓN DE ÉLITE&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-[11px] text-slate-500 mt-1"&gt;Docentes certificados internacionalmente en Google Workspace.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="block mt-3 text-lg font-bold text-emerald-700"&gt;225 Candidatos N1&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- 3. Analytical Charts --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 lg:grid-cols-2 gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="card p-8 flex flex-col"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-start mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-slate-800"&gt;Priorización de IA&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-500"&gt;Formación específica vs General&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs font-bold text-emerald-600"&gt;82% Focalizado&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-grow flex items-center justify-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;canvas id="strategyFocusChart" height="180"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="card p-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex justify-between items-start mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-slate-800"&gt;Cobertura Territorial&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-500"&gt;Impacto por Región del Estado&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;canvas id="regionalImpactChart" height="200"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Tab: Repositorio Video (CON TODAS LAS LIGAS) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="proyectos" class="tab-content space-y-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Sección Sincrónicos --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center space-x-2 border-l-4 border-red-600 pl-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-lg font-bold text-slate-800 uppercase tracking-tight"&gt;Procesos Sincrónicos (En Vivo)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Google N1 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-6 border-l-4 border-red-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex justify-between items-start mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-[10px] font-bold bg-red-50 text-red-700 px-2 py-0.5 rounded uppercase"&gt;Trayecto Sincrónico&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;i class="fab fa-google text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-bold text-slate-900"&gt;Certificación Google Nivel 1&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-xs text-slate-500 mt-2 mb-4 leading-relaxed"&gt;Formación intensiva de 6 sesiones para la habilitación técnica oficial.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center justify-between border-t pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs font-bold text-slate-700"&gt;16,083 vistas&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;a href="https://www.youtube.com/watch?v=2whS3PD9ypc&amp;list=PL6UhGvZdF4ujRw6V6wPBK4R7RUc6o5Pi-" target="_blank" class="text-xs font-bold text-red-700 hover:underline"&gt;Ver Sesiones &lt;i class="fas fa-external-link-alt ml-1"&gt;&lt;/i&gt;&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Webinars Estructura --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-6 border-l-4 border-red-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex justify-between items-start mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-[10px] font-bold bg-red-50 text-red-700 px-2 py-0.5 rounded uppercase"&gt;Webinar Sincrónico&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;i class="fas fa-users-cog text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-bold text-slate-900"&gt;Webinar para la Estructura Educativa&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-xs text-slate-500 mt-2 mb-4 leading-relaxed"&gt;Sesiones informativas masivas sobre el impacto de la IA en la educación.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center justify-between border-t pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs font-bold text-slate-700"&gt;15,783 vistas&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;a href="https://www.youtube.com/@educacionjalisco/search?query=Webinar+Estructura" target="_blank" class="text-xs font-bold text-red-700 hover:underline"&gt;Ver Contenido &lt;i class="fas fa-external-link-alt ml-1"&gt;&lt;/i&gt;&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Sección Asincrónicos --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-4 pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center space-x-2 border-l-4 border-emerald-600 pl-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-lg font-bold text-slate-800 uppercase tracking-tight"&gt;Repositorio Asincrónico (Tutoriales y Cursos)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- IA Proyectos --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-6 flex flex-col justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex justify-between items-start mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded uppercase"&gt;21 Videos&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;i class="fas fa-brain text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-slate-900"&gt;IA en tu Salón de Clases&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-500 mt-2 mb-4 leading-relaxed"&gt;Estrategia integral para el uso de IA en la planeación y docencia.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center justify-between border-t pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs font-bold text-slate-700"&gt;27,531 vistas&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ujU7SIgeH0cybxUgCmMpvfd" target="_blank" class="text-xs font-bold text-blue-800 hover:underline"&gt;Ver Playlist&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Aula Digital --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-6 flex flex-col justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex justify-between items-start mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded uppercase"&gt;34 Videos&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;i class="fas fa-laptop text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-slate-900"&gt;Aula Digital Jalisco Paso a Paso&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-500 mt-2 mb-4 leading-relaxed"&gt;Guías técnicas para el uso de Chromebooks y herramientas Google.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center justify-between border-t pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs font-bold text-slate-700"&gt;26,978 vistas&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ujFMmbvz50q_KI4zKfINSso" target="_blank" class="text-xs font-bold text-blue-800 hover:underline"&gt;Ver Playlist&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Reto STEAM --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-6 flex flex-col justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex justify-between items-start mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded uppercase"&gt;11 Videos&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;i class="fas fa-rocket text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-slate-900"&gt;Reto STEAM 2025&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-500 mt-2 mb-4 leading-relaxed"&gt;Seguimiento y sesiones formativas del proceso STEAM Jalisco.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center justify-between border-t pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs font-bold text-slate-700"&gt;17,942 vistas&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;a href="https://www.youtube.com/watch?v=NOps201zVPQ&amp;list=PL6UhGvZdF4ui6Le9F3dEmv7lML2X6Ain5" target="_blank" class="text-xs font-bold text-blue-800 hover:underline"&gt;Ver Playlist&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- IA Gemini --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-6 flex flex-col justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex justify-between items-start mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded uppercase"&gt;4 Videos&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;i class="fas fa-star text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-slate-900"&gt;Inteligencia Artificial con Gemini&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-500 mt-2 mb-4 leading-relaxed"&gt;Cápsulas especializadas sobre el motor de IA de Google.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center justify-between border-t pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs font-bold text-slate-700"&gt;8,570 vistas&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ujmqpTHzPl_9rgpWrGnNthf" target="_blank" class="text-xs font-bold text-blue-800 hover:underline"&gt;Ver Playlist&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- Diálogos Familias --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-6 flex flex-col justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="flex justify-between items-start mb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span class="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded uppercase"&gt;4 Videos&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;i class="fas fa-home text-slate-300"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;h4 class="font-bold text-slate-900"&gt;Diálogos con Familias&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;p class="text-xs text-slate-500 mt-2 mb-4 leading-relaxed"&gt;Vinculación digital y temas de interés para la comunidad escolar.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="flex items-center justify-between border-t pt-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs font-bold text-slate-700"&gt;6,717 vistas&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ug6WWtJmUDCPzO7gpy97-9d" target="_blank" class="text-xs font-bold text-blue-800 hover:underline"&gt;Ver Playlist&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Tab: Numeralia --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="numeralia" class="tab-content space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="card p-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h4 class="font-bold mb-4"&gt;Desglose de Capacitación&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h5 class="text-xs font-bold uppercase text-slate-400 mb-4"&gt;Modalidad de Intervención&lt;/h5&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;canvas id="modalidadChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h5 class="text-xs font-bold uppercase text-slate-400 mb-4"&gt;Población por Función&lt;/h5&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;canvas id="funcionChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Tab: Logros y Retos --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="logros" class="tab-content space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h4 class="text-xs font-bold uppercase tracking-widest text-blue-900 mb-4"&gt;Hitos de Gestión 2025&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-5 border-l-4 border-blue-800"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h5 class="font-bold text-sm"&gt;Escalabilidad Regional&lt;/h5&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-xs text-slate-600 mt-2"&gt;Logramos un despliegue masivo equilibrado entre el área metropolitana y el interior del estado.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h4 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4"&gt;Retos de Infraestructura&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-5 border-l-4 border-slate-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h5 class="font-bold text-sm"&gt;Consolidación de Espacios&lt;/h5&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="text-xs text-slate-600 mt-2"&gt;La demanda requiere formalizar una cabina técnica especializada.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/main&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function switchTab(tabId) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.tab-content').forEach(tab =&gt; tab.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('aside button').forEach(btn =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.classList.remove('sidebar-item-active');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.classList.add('text-gray-600', 'hover:bg-gray-50');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById(tabId).classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const activeBtn = document.getElementById('nav-' + tabId);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>activeBtn.classList.add('sidebar-item-active');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>activeBtn.classList.remove('text-gray-600', 'hover:bg-gray-50');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onload = function() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const commonOptions = { responsive: true, plugins: { legend: { display: false } } };</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(document.getElementById('strategyFocusChart'), {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'doughnut',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['IA Específica', 'Alfabetización General'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{ data: [9778, 2178], backgroundColor: ['#1e40af', '#e2e8f0'], borderWidth: 0 }]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: { cutout: '80%', ...commonOptions }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(document.getElementById('regionalImpactChart'), {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'bar',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['Centro', 'Sur', 'Ciénega', 'Valles', 'Sur', 'Costa'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>data: [5620, 986, 975, 880, 845, 790],</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: '#1e40af',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>borderRadius: 6</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>...commonOptions,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scales: { y: { beginAtZero: true, grid: { display: false } }, x: { grid: { display: false } } }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(document.getElementById('modalidadChart'), {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'polarArea',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['Aula Google', 'C. Educativo', 'Meet', 'Webinar'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{ data: [42, 36, 12, 10], backgroundColor: ['#1e40af', '#4f46e5', '#3b82f6', '#93c5fd'] }]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: { plugins: { legend: { position: 'bottom' } } }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(document.getElementById('funcionChart'), {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'pie',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: ['Docentes', 'Directivos', 'Otros'],</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{ data: [7771, 1673, 2512], backgroundColor: ['#1e40af', '#4f46e5', '#cbd5e1'] }]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: { plugins: { legend: { position: 'bottom' } } }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
