@@ -9,191 +9,444 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
-        .sidebar-item-active { background-color: #e5e7eb; border-right: 4px solid #1e40af; color: #1e40af; }
-        .card { background: white; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; }
-        .btn-primary { background-color: #1e40af; color: white; transition: background 0.3s; }
-        .btn-primary:hover { background-color: #1e3a8a; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .funnel-step { position: relative; padding: 1rem; border-radius: 0.5rem; text-align: center; }
-        .funnel-arrow::after { content: '→'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-weight: bold; color: #cbd5e1; }
-        @media (max-width: 768px) { .funnel-arrow::after { content: '↓'; right: auto; left: 50%; top: auto; bottom: -25px; transform: translateX(-50%); } }
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; overflow-x: hidden; }
+        .sidebar-item-active { background-color: #f1f5f9; border-right: 4px solid #1e40af; color: #1e40af; font-weight: 600; }
+        .card { background: white; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .tab-content { display: none; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        .tab-content.active { display: block; opacity: 1; }
+        .funnel-step { position: relative; padding: 1.5rem; border-radius: 0.75rem; text-align: center; }
+        .funnel-arrow::after { content: '\f061'; font-family: 'Font Awesome 5 Free'; font-weight: 900; position: absolute; right: -25px; top: 50%; transform: translateY(-50%); color: #cbd5e1; font-size: 1.25rem; }
+        @media (max-width: 768px) { .funnel-arrow::after { content: '\f063'; right: auto; left: 50%; top: auto; bottom: -25px; transform: translateX(-50%); } }
+        canvas { max-width: 100% !important; height: auto !important; }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="text-slate-800 antialiased">
 
-    <nav class="bg-white border-b border-gray-200 fixed w-full z-30 top-0">
-        <div class="px-6 py-3 flex items-center justify-between">
-            <div class="flex items-center">
-                <div class="bg-blue-800 p-2 rounded-lg mr-3">
-                    <i class="fas fa-microchip text-white"></i>
-                </div>
-                <div>
-                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Estrategia de Alfabetización Digital</h1>
-                    <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">Jalisco 2025 | Informe Estratégico</p>
-                </div>
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-200 fixed w-full z-50 top-0 h-16 flex items-center px-6 justify-between">
+        <div class="flex items-center">
+            <div class="bg-blue-800 p-2 rounded-lg mr-4">
+                <i class="fas fa-microchip text-white text-lg"></i>
             </div>
-            <div class="flex items-center space-x-4">
-                <button class="text-sm font-bold text-blue-800 hover:text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg transition">
-                    <i class="fas fa-file-pdf mr-1"></i> Informe Final
-                </button>
+            <div>
+                <h1 class="text-lg font-bold text-slate-900 leading-none">Estrategia de Alfabetización Digital</h1>
+                <p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold mt-1">Secretaría de Educación Jalisco | Informe 2025</p>
             </div>
+        </div>
+        <div class="hidden md:flex space-x-2">
+            <span class="text-[10px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-bold">CICLO 25</span>
+            <span class="text-[10px] bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold uppercase">Octubre 2025</span>
         </div>
     </nav>
 
     <div class="flex pt-16">
-        <aside class="w-64 bg-white h-screen fixed border-r border-gray-200 hidden md:block">
-            <div class="p-4 space-y-2">
-                <p class="text-[10px] font-bold text-gray-400 uppercase px-3 py-2">Estructura del Informe</p>
-                <button onclick="switchTab('resumen')" id="nav-resumen" class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg sidebar-item-active">
-                    <i class="fas fa-home mr-3"></i> Panel Estratégico
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 bg-white h-screen fixed border-r border-gray-200 hidden md:block overflow-y-auto">
+            <div class="p-4 space-y-1">
+                <p class="text-[10px] font-bold text-gray-400 uppercase px-3 pb-2 pt-4">Navegación del Informe</p>
+                <button onclick="switchTab('resumen')" id="nav-resumen" class="w-full flex items-center px-4 py-3 text-sm rounded-lg sidebar-item-active transition-all">
+                    <i class="fas fa-chart-pie mr-3 w-5"></i> Panel Estratégico
                 </button>
-                <button onclick="switchTab('proyectos')" id="nav-proyectos" class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 transition">
-                    <i class="fas fa-play-circle mr-3"></i> Repositorio de Video
+                <button onclick="switchTab('proyectos')" id="nav-proyectos" class="w-full flex items-center px-4 py-3 text-sm rounded-lg text-gray-600 hover:bg-gray-50 transition-all">
+                    <i class="fas fa-play-circle mr-3 w-5"></i> Repositorio de Video
                 </button>
-                <button onclick="switchTab('numeralia')" id="nav-numeralia" class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 transition">
-                    <i class="fas fa-table mr-3"></i> Numeralia Detallada
+                <button onclick="switchTab('numeralia')" id="nav-numeralia" class="w-full flex items-center px-4 py-3 text-sm rounded-lg text-gray-600 hover:bg-gray-50 transition-all">
+                    <i class="fas fa-list-ol mr-3 w-5"></i> Numeralia y Alcance
                 </button>
-                <button onclick="switchTab('logros')" id="nav-logros" class="w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 transition">
-                    <i class="fas fa-trophy mr-3"></i> Logros y Retos
+                <button onclick="switchTab('innovacion')" id="nav-innovacion" class="w-full flex items-center px-4 py-3 text-sm rounded-lg text-gray-600 hover:bg-gray-50 transition-all">
+                    <i class="fas fa-rocket mr-3 w-5"></i> Innovación Aplicada
+                </button>
+                <button onclick="switchTab('logros')" id="nav-logros" class="w-full flex items-center px-4 py-3 text-sm rounded-lg text-gray-600 hover:bg-gray-50 transition-all">
+                    <i class="fas fa-award mr-3 w-5"></i> Gestión y Logros
                 </button>
             </div>
         </aside>
 
-        <main class="flex-grow md:ml-64 p-6 md:p-8">
+        <!-- Main Content -->
+        <main class="flex-grow md:ml-64 p-6 lg:p-10 min-h-screen">
             
+            <!-- Tab: Panel Estratégico -->
             <div id="resumen" class="tab-content active space-y-8">
                 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="card p-6 bg-white">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded uppercase">Cifra Estatal</span>
-                            <i class="fas fa-users text-slate-300"></i>
+                <!-- KPIs Destacados -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="card p-6 border-b-4 border-blue-800">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-1 rounded uppercase tracking-tighter">Alcance Estatal</span>
+                            <i class="fas fa-users text-slate-200 text-xl"></i>
                         </div>
-                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">11,956</h2>
-                        <p class="text-xs font-semibold text-slate-500 uppercase mt-1">Personas Capacitadas</p>
+                        <h2 class="text-4xl font-extrabold text-slate-900 tracking-tighter">11,956</h2>
+                        <p class="text-[11px] font-bold text-slate-500 uppercase mt-2">Figuras Educativas Capacitadas</p>
                     </div>
-                    <div class="card p-6 bg-white">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded uppercase">Eje Prioritario</span>
+                    <div class="card p-6 border-b-4 border-purple-600">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-black text-purple-600 bg-purple-50 px-2 py-1 rounded uppercase tracking-tighter">Eje Inteligencia Artificial</span>
+                            <i class="fas fa-brain text-slate-200 text-xl"></i>
+                        </div>
+                        <h2 class="text-4xl font-extrabold text-slate-900 tracking-tighter">9,778</h2>
+                        <p class="text-[11px] font-bold text-slate-500 uppercase mt-2">Especialistas en IA Formados</p>
+                    </div>
+                    <div class="card p-6 border-b-4 border-indigo-600">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-black text-indigo-600 bg-indigo-50 px-2 py-1 rounded uppercase tracking-tighter">Producción Sincrónica</span>
+                            <i class="fas fa-broadcast-tower text-slate-200 text-xl"></i>
+                        </div>
+                        <h2 class="text-4xl font-extrabold text-slate-900 tracking-tighter">81</h2>
+                        <p class="text-[11px] font-bold text-slate-500 uppercase mt-2">Cursos y Webinars Realizados</p>
+                    </div>
+                    <div class="card p-6 border-b-4 border-red-600">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-black text-red-600 bg-red-50 px-2 py-1 rounded uppercase tracking-tighter">Impacto Streaming</span>
+                            <i class="fas fa-play text-slate-200 text-xl"></i>
+                        </div>
+                        <h2 class="text-4xl font-extrabold text-slate-900 tracking-tighter">138,306</h2>
+                        <p class="text-[11px] font-bold text-slate-500 uppercase mt-2">Vistas Acumuladas 2025</p>
+                    </div>
+                </div>
+
+                <!-- Introducción y Embudo -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-8 space-y-8">
+                        <div class="card p-8">
+                            <h3 class="text-xl font-bold mb-4 flex items-center">
+                                <span class="w-1.5 h-6 bg-blue-800 rounded-full mr-3"></span> Introducción Institucional
+                            </h3>
+                            <p class="text-sm text-slate-600 leading-relaxed text-justify">
+                                La Dirección de Alfabetización Digital promueve la integración tecnológica en los procesos de enseñanza-aprendizaje. Durante 2025, alineamos nuestras acciones bajo tres líneas estratégicas: la alfabetización con <strong>Google Workspace</strong>, la <strong>Ciudadanía Digital</strong> y el uso de la <strong>Inteligencia Artificial</strong>. 
+                                <br><br>
+                                Además de la capacitación, profesionalizamos la producción audiovisual institucional con el programa <strong>"Jalisco Aprende TV"</strong> y la reactivación del ecosistema de YouTube, impactando a miles de docentes y familias bajo un enfoque de inclusión e innovación pedagógica.
+                            </p>
+                        </div>
+
+                        <!-- Funnel -->
+                        <div class="card p-8">
+                            <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-10 text-center">Modelo de Escalamiento Digital 2025</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+                                <div class="funnel-step bg-slate-50 border border-slate-200 funnel-arrow">
+                                    <div class="text-blue-800 text-3xl mb-3"><i class="fas fa-bullhorn"></i></div>
+                                    <h5 class="font-bold text-xs uppercase text-slate-700 tracking-tighter">Difusión Masiva</h5>
+                                    <p class="text-[11px] text-slate-500 mt-2">Sensibilización en vivo vía Streaming.</p>
+                                    <span class="block mt-4 text-2xl font-black text-slate-800">138k+</span>
+                                </div>
+                                <div class="funnel-step bg-blue-50 border border-blue-100 funnel-arrow">
+                                    <div class="text-blue-800 text-3xl mb-3"><i class="fas fa-chalkboard-teacher"></i></div>
+                                    <h5 class="font-bold text-xs uppercase text-blue-900 tracking-tighter">Formación Técnica</h5>
+                                    <p class="text-[11px] text-blue-600 mt-2">Capacitación específica en IA y Google.</p>
+                                    <span class="block mt-4 text-2xl font-black text-blue-900 tracking-tighter">11,956</span>
+                                </div>
+                                <div class="funnel-step bg-indigo-900 border border-indigo-950 text-white">
+                                    <div class="text-indigo-300 text-3xl mb-3"><i class="fas fa-award"></i></div>
+                                    <h5 class="font-bold text-xs uppercase text-indigo-100 tracking-tighter">Certificación</h5>
+                                    <p class="text-[11px] text-indigo-200 mt-2">Habilitación Nivel 1 Internacional.</p>
+                                    <span class="block mt-4 text-2xl font-black text-white">225</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4 space-y-6">
+                        <!-- Hitos Sidebar -->
+                        <div class="card p-6 bg-slate-900 text-white h-full relative overflow-hidden">
+                            <h4 class="text-xs font-black uppercase text-blue-400 mb-6 tracking-widest">Hitos de Gestión</h4>
+                            <div class="space-y-6 relative z-10">
+                                <div class="flex items-center group">
+                                    <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mr-4 group-hover:bg-blue-600 transition-colors">
+                                        <i class="fas fa-tv text-blue-300"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-bold">Jalisco Aprende TV</p>
+                                        <p class="text-[10px] text-slate-400">Canal 17.1 todos los lunes</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center group">
+                                    <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mr-4 group-hover:bg-blue-600 transition-colors">
+                                        <i class="fas fa-graduation-cap text-blue-300"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-bold">Aula Jalisco Digital</p>
+                                        <p class="text-[10px] text-slate-400">2,000 capacitados al mes</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center group">
+                                    <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center mr-4 group-hover:bg-blue-600 transition-colors">
+                                        <i class="fas fa-robot text-blue-300"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-bold">Estrategia DIIA</p>
+                                        <p class="text-[10px] text-slate-400">Red Estatal de Docentes IA</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fas fa-shield-alt absolute -right-10 -bottom-10 text-white/5 text-[10rem]"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficas Principales -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h4 class="font-bold text-slate-800">Priorización de la IA en la Estrategia</h4>
+                            <span class="text-xs font-black text-blue-800 bg-blue-50 px-2 py-1 rounded">82% Focalización</span>
+                        </div>
+                        <div style="height: 250px;">
+                            <canvas id="strategyFocusChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card p-8 text-center">
+                        <h4 class="font-bold text-slate-800 mb-6">Brecha de Experiencia en Docentes (IA)</h4>
+                        <div class="flex flex-col md:flex-row items-center justify-around">
+                            <div style="height: 200px; width: 200px;">
+                                <canvas id="experienceDoughnut"></canvas>
+                            </div>
+                            <div class="text-left space-y-4 mt-6 md:mt-0">
+                                <div class="flex items-center">
+                                    <span class="w-3 h-3 bg-blue-800 rounded-full mr-2"></span>
+                                    <span class="text-xs font-bold">57.6% Sin experiencia previa</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-3 h-3 bg-slate-200 rounded-full mr-2"></span>
+                                    <span class="text-xs font-bold text-slate-400">42.4% Con experiencia</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Repositorio Video -->
+            <div id="proyectos" class="tab-content space-y-12">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <h3 class="text-2xl font-bold">Centro de Recursos Audiovisuales</h3>
+                    <div class="flex gap-2">
+                        <span class="text-[10px] font-bold border border-red-100 text-red-700 bg-red-50 px-3 py-1 rounded-full uppercase">Sincrónicos (En Vivo)</span>
+                        <span class="text-[10px] font-bold border border-emerald-100 text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full uppercase">Asincrónicos (Tutoriales)</span>
+                    </div>
+                </div>
+
+                <!-- Grilla de Videos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Google Cert -->
+                    <div class="card p-5 border-l-4 border-red-600">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded uppercase">Sincrónico</span>
+                            <i class="fab fa-google text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-sm leading-tight mb-2">Google Workspace Nivel 1</h4>
+                        <p class="text-[11px] text-slate-500 mb-4 h-12 overflow-hidden">Trayecto formativo intensivo de 6 sesiones para la certificación internacional.</p>
+                        <div class="border-t pt-4 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">16,083 Vistas</span>
+                            <a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ujRw6V6wPBK4R7RUc6o5Pi-" target="_blank" class="text-blue-800 text-[11px] font-black hover:underline uppercase">Abrir Playlist <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- IA Salón -->
+                    <div class="card p-5 border-l-4 border-emerald-600">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase">Asincrónico</span>
                             <i class="fas fa-brain text-slate-300"></i>
                         </div>
-                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">9,778</h2>
-                        <p class="text-xs font-semibold text-slate-500 uppercase mt-1">Formados en IA</p>
-                    </div>
-                    <div class="card p-6 bg-white">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded uppercase">Infraestructura</span>
-                            <i class="fas fa-chalkboard text-slate-300"></i>
+                        <h4 class="font-bold text-sm leading-tight mb-2">IA en tu Salón de Clases</h4>
+                        <p class="text-[11px] text-slate-500 mb-4 h-12 overflow-hidden">Serie de 21 videos sobre la integración pedagógica de la inteligencia artificial.</p>
+                        <div class="border-t pt-4 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">27,531 Vistas</span>
+                            <a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ug6WWtJmUDCPzO7gpy97-9d" target="_blank" class="text-blue-800 text-[11px] font-black hover:underline uppercase">Abrir Playlist <i class="fas fa-external-link-alt ml-1"></i></a>
                         </div>
-                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">81</h2>
-                        <p class="text-xs font-semibold text-slate-500 uppercase mt-1">Cursos Impartidos</p>
                     </div>
-                    <div class="card p-6 bg-white">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded uppercase">Alcance Digital</span>
-                            <i class="fas fa-signal text-slate-300"></i>
+                    <!-- Aula Digital -->
+                    <div class="card p-5 border-l-4 border-emerald-600">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase">Asincrónico</span>
+                            <i class="fas fa-laptop text-slate-300"></i>
                         </div>
-                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">138,306</h2>
-                        <p class="text-xs font-semibold text-slate-500 uppercase mt-1">Vistas en Streaming</p>
+                        <h4 class="font-bold text-sm leading-tight mb-2">Aula Digital Jalisco</h4>
+                        <p class="text-[11px] text-slate-500 mb-4 h-12 overflow-hidden">34 tutoriales paso a paso sobre el ecosistema tecnológico estatal.</p>
+                        <div class="border-t pt-4 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">26,978 Vistas</span>
+                            <a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ujFMmbvz50q_KI4zKfINSso" target="_blank" class="text-blue-800 text-[11px] font-black hover:underline uppercase">Abrir Playlist <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Reto STEAM -->
+                    <div class="card p-5 border-l-4 border-emerald-600">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase">Asincrónico</span>
+                            <i class="fas fa-rocket text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-sm leading-tight mb-2">Reto STEAM 2025</h4>
+                        <p class="text-[11px] text-slate-500 mb-4 h-12 overflow-hidden">11 sesiones de acompañamiento formativo para proyectos tecnológicos.</p>
+                        <div class="border-t pt-4 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">17,942 Vistas</span>
+                            <a href="https://www.youtube.com/watch?v=NOps201zVPQ&list=PL6UhGvZdF4ui6Le9F3dEmv7lML2X6Ain5" target="_blank" class="text-blue-800 text-[11px] font-black hover:underline uppercase">Abrir Playlist <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Gemini Academy -->
+                    <div class="card p-5 border-l-4 border-red-600">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded uppercase">Sincrónico</span>
+                            <i class="fas fa-star text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-sm leading-tight mb-2">Gemini Academy</h4>
+                        <p class="text-[11px] text-slate-500 mb-4 h-12 overflow-hidden">Especialización intensiva en el motor de IA de Google para docentes.</p>
+                        <div class="border-t pt-4 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">8,570 Vistas</span>
+                            <a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ujmqpTHzPl_9rgpWrGnNthf" target="_blank" class="text-blue-800 text-[11px] font-black hover:underline uppercase">Abrir Playlist <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Ciudadanía Digital -->
+                    <div class="card p-5 border-l-4 border-emerald-600">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase">Micrositio</span>
+                            <i class="fas fa-shield-alt text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-sm leading-tight mb-2">Ciudadanía Digital Jalisco</h4>
+                        <p class="text-[11px] text-slate-500 mb-4 h-12 overflow-hidden">Repositorio de recursos para la navegación segura y crianza digital.</p>
+                        <div class="border-t pt-4 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">Consultas Públicas</span>
+                            <a href="https://ciudadaniadigital.jalisco.gob.mx/" target="_blank" class="text-blue-800 text-[11px] font-black hover:underline uppercase">Visitar Sitio <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- Diálogos Familias -->
+                    <div class="card p-5 border-l-4 border-emerald-600">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase">Vinculación</span>
+                            <i class="fas fa-home text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-sm leading-tight mb-2">Diálogos con Familias</h4>
+                        <p class="text-[11px] text-slate-500 mb-4 h-12 overflow-hidden">Cápsulas sobre el impacto de la tecnología en el núcleo familiar.</p>
+                        <div class="border-t pt-4 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">6,717 Vistas</span>
+                            <a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ug6WWtJmUDCPzO7gpy97-9d" target="_blank" class="text-blue-800 text-[11px] font-black hover:underline uppercase">Abrir Playlist <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                    <!-- IA Preescolar -->
+                    <div class="card p-5 border-l-4 border-emerald-600">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase">Nivelativo</span>
+                            <i class="fas fa-child text-slate-300"></i>
+                        </div>
+                        <h4 class="font-bold text-sm leading-tight mb-2">IA en Preescolar</h4>
+                        <p class="text-[11px] text-slate-500 mb-4 h-12 overflow-hidden">Uso de Gemini para la generación de contenidos en educación inicial.</p>
+                        <div class="border-t pt-4 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase">Especializado</span>
+                            <a href="https://www.youtube.com/playlist?list=PL6UhGvZdF4ui7c9SYmo-vipkBrj0uYKyA" target="_blank" class="text-blue-800 text-[11px] font-black hover:underline uppercase">Abrir Playlist <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Numeralia -->
+            <div id="numeralia" class="tab-content space-y-8">
+                <div class="card p-8">
+                    <h3 class="text-xl font-bold mb-6">Métricas Detalladas de Capacitación Directa</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div class="space-y-6">
+                            <h4 class="text-xs font-black uppercase text-slate-400 tracking-widest">Distribución Regional del Impacto</h4>
+                            <div style="height: 300px;">
+                                <canvas id="regionalImpactChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <h4 class="text-xs font-black uppercase text-slate-400 tracking-widest">Perfil de la Población Atendida</h4>
+                            <div style="height: 300px;">
+                                <canvas id="functionChart"></canvas>
+                            </div>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div class="p-2 bg-slate-50 rounded">
+                                    <p class="text-lg font-bold">65%</p>
+                                    <p class="text-[10px] uppercase text-slate-500">Docentes</p>
+                                </div>
+                                <div class="p-2 bg-slate-50 rounded">
+                                    <p class="text-lg font-bold">14%</p>
+                                    <p class="text-[10px] uppercase text-slate-500">Directivos</p>
+                                </div>
+                                <div class="p-2 bg-slate-50 rounded">
+                                    <p class="text-lg font-bold">21%</p>
+                                    <p class="text-[10px] uppercase text-slate-500">Apoyo/Otros</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card p-8 bg-white overflow-hidden">
-                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">El Sentido de la Estrategia: Embudo de Transformación Digital</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-                        <div class="funnel-step bg-slate-50 border border-slate-200 funnel-arrow">
-                            <div class="text-blue-600 text-2xl mb-2"><i class="fas fa-bullhorn"></i></div>
-                            <h4 class="font-bold text-sm">DIFUSIÓN MASIVA</h4>
-                            <p class="text-[11px] text-slate-500 mt-1">Streaming y webinars para sensibilizar a toda la estructura educativa.</p>
-                            <span class="block mt-3 text-lg font-bold text-slate-700">138k+ Impactos</span>
+                <div class="card p-8">
+                    <h4 class="text-xs font-black uppercase text-slate-400 tracking-widest mb-6">Alcance por Nivel Educativo (Webinar IA)</h4>
+                    <div style="height: 350px;">
+                        <canvas id="levelsDetailedChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Innovación -->
+            <div id="innovacion" class="tab-content space-y-8">
+                <div class="card p-8 border-l-8 border-orange-500">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-600">
+                            <i class="fas fa-robot text-3xl"></i>
                         </div>
-                        <div class="funnel-step bg-blue-50 border border-blue-100 funnel-arrow">
-                            <div class="text-blue-800 text-2xl mb-2"><i class="fas fa-user-edit"></i></div>
-                            <h4 class="font-bold text-sm">CAPACITACIÓN DIRECTA</h4>
-                            <p class="text-[11px] text-slate-500 mt-1">Especialización técnica en IA y alfabetización digital en sitio.</p>
-                            <span class="block mt-3 text-lg font-bold text-blue-800">11,956 Formados</span>
+                        <div>
+                            <h3 class="text-2xl font-bold">Robótica y Pensamiento Computacional</h3>
+                            <p class="text-slate-500">Línea prioritaria de alfabetización digital aplicada.</p>
                         </div>
-                        <div class="funnel-step bg-emerald-50 border border-emerald-100">
-                            <div class="text-emerald-700 text-2xl mb-2"><i class="fas fa-certificate"></i></div>
-                            <h4 class="font-bold text-sm">ESPECIALIZACIÓN DE ÉLITE</h4>
-                            <p class="text-[11px] text-slate-500 mt-1">Docentes certificados internacionalmente en Google Workspace.</p>
-                            <span class="block mt-3 text-lg font-bold text-emerald-700">225 Candidatos N1</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="space-y-3">
+                            <h5 class="font-bold text-sm uppercase text-orange-700">Acompañamiento LEGO</h5>
+                            <p class="text-xs text-slate-600 leading-relaxed">Entrega de 42 kits LEGO Robotix para educación básica y formación de 20 escuelas adicionales.</p>
+                            <span class="inline-block text-[10px] bg-orange-50 text-orange-700 px-2 py-1 rounded font-bold">Fundación LEGO</span>
+                        </div>
+                        <div class="space-y-3">
+                            <h5 class="font-bold text-sm uppercase text-orange-700">OctoStudio (MIT)</h5>
+                            <p class="text-xs text-slate-600 leading-relaxed">Clases virtuales sincrónicas desde Silicon Valley con expertos del MIT para escuelas de Jalisco.</p>
+                            <span class="inline-block text-[10px] bg-orange-50 text-orange-700 px-2 py-1 rounded font-bold">Silicon Valley Link</span>
+                        </div>
+                        <div class="space-y-3">
+                            <h5 class="font-bold text-sm uppercase text-orange-700">Habilitación mBot</h5>
+                            <p class="text-xs text-slate-600 leading-relaxed">Reactivación de kits existentes mediante cursos autogestivos de alta resolución en Apprende Jalisco Digital.</p>
+                            <span class="inline-block text-[10px] bg-orange-50 text-orange-700 px-2 py-1 rounded font-bold">Cody Rocky / Scratch</span>
                         </div>
                     </div>
                 </div>
 
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6 bg-blue-900 text-white">
+                        <h4 class="font-bold mb-3 flex items-center"><i class="fas fa-vr-cardboard mr-2"></i> Tecnologías Inmersivas</h4>
+                        <p class="text-xs text-blue-100 leading-relaxed mb-4">Capacitación docente en operación de visores de Realidad Virtual para formación inicial docente.</p>
+                        <div class="h-1 bg-blue-700 rounded-full overflow-hidden"><div class="bg-blue-300 h-full w-1/3"></div></div>
+                    </div>
+                    <div class="card p-6 bg-slate-100">
+                        <h4 class="font-bold mb-3 flex items-center text-slate-800"><i class="fas fa-university mr-2 text-blue-800"></i> Estrategia CIELO</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Vinculación con las 11 Normales Públicas de Jalisco para la transformación desde la formación inicial.</p>
+                    </div>
+                    <div class="card p-6 border-2 border-dashed border-slate-300">
+                        <h4 class="font-bold mb-3 flex items-center text-slate-800"><i class="fas fa-file-invoice mr-2 text-indigo-800"></i> AVANZA-GEN</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Piloto de plataforma de evaluación digital con recomendaciones automatizadas vía IA en Chromebooks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Logros y Retos -->
+            <div id="logros" class="tab-content space-y-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div class="card p-8 flex flex-col">
-                        <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <h4 class="font-bold text-slate-800">Priorización de IA</h4>
-                                <p class="text-xs text-slate-500">Formación específica vs General</p>
-                            </div>
-                            <span class="text-xs font-bold text-emerald-600">82% Focalizado</span>
-                        </div>
-                        <div class="flex-grow flex items-center justify-center">
-                            <canvas id="strategyFocusChart" height="180"></canvas>
-                        </div>
-                    </div>
-                    <div class="card p-8">
-                        <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <h4 class="font-bold text-slate-800">Cobertura Territorial</h4>
-                                <p class="text-xs text-slate-500">Impacto por Región del Estado</p>
-                            </div>
-                        </div>
-                        <canvas id="regionalImpactChart" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div id="proyectos" class="tab-content space-y-8">
-                <div class="space-y-4">
-                    <div class="flex items-center space-x-2 border-l-4 border-red-600 pl-4">
-                        <h3 class="text-lg font-bold text-slate-800 uppercase tracking-tight">Procesos Sincrónicos (En Vivo)</h3>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="card p-6 border-l-4 border-red-600">
-                            <div class="flex justify-between items-start mb-4">
-                                <span class="text-[10px] font-bold bg-red-50 text-red-700 px-2 py-0.5 rounded uppercase">Trayecto Sincrónico</span>
-                                <i class="fab fa-google text-slate-300"></i>
-                            </div>
-                            <h4 class="font-bold text-slate-900">Certificación Google Nivel 1</h4>
-                            <p class="text-xs text-slate-500 mt-2 mb-4">Formación intensiva de 6 sesiones para la habilitación técnica oficial.</p>
-                            <div class="flex items-center justify-between border-t pt-4">
-                                <span class="text-xs font-bold text-slate-700">16,083 vistas</span>
-                                <a href="https://www.youtube.com/watch?v=2whS3PD9ypc&list=PL6UhGvZdF4ujRw6V6wPBK4R7RUc6o5Pi-" target="_blank" class="text-xs font-bold text-red-700 hover:underline">Ver Sesiones <i class="fas fa-external-link-alt ml-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="numeralia" class="tab-content space-y-6">
-                <div class="card p-6">
-                    <h4 class="font-bold mb-4">Desglose de Capacitación</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h5 class="text-xs font-bold uppercase text-slate-400 mb-4">Modalidad de Intervención</h5>
-                            <canvas id="modalidadChart"></canvas>
-                        </div>
-                        <div>
-                            <h5 class="text-xs font-bold uppercase text-slate-400 mb-4">Población por Función</h5>
-                            <canvas id="funcionChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="logros" class="tab-content space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-4">
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-blue-900 mb-4">Hitos de Gestión 2025</h4>
+                        <h4 class="text-xs font-black uppercase text-blue-900 tracking-widest px-2">Hitos de Gestión 2025</h4>
                         <div class="card p-5 border-l-4 border-blue-800">
-                            <h5 class="font-bold text-sm">Escalabilidad Regional</h5>
-                            <p class="text-xs text-slate-600 mt-2">Logramos un despliegue masivo equilibrado entre el área metropolitana y el interior del estado.</p>
+                            <h5 class="font-bold text-sm">Escalabilidad de la IA</h5>
+                            <p class="text-xs text-slate-600 mt-2">Integración exitosa del 82% del personal en trayectos de Inteligencia Artificial.</p>
+                        </div>
+                        <div class="card p-5 border-l-4 border-blue-800">
+                            <h5 class="font-bold text-sm">Profesionalización Streaming</h5>
+                            <p class="text-xs text-slate-600 mt-2">100% de emisiones exitosas con estándares profesionales para Jalisco Aprende TV.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-xs font-black uppercase text-slate-400 tracking-widest px-2">Desafíos Pendientes</h4>
+                        <div class="card p-5 border-l-4 border-slate-400">
+                            <h5 class="font-bold text-sm">Cabina Especializada</h5>
+                            <p class="text-xs text-slate-600 mt-2">Necesidad de formalizar un espacio físico permanente de producción ante la demanda.</p>
+                        </div>
+                        <div class="card p-5 border-l-4 border-slate-400">
+                            <h5 class="font-bold text-sm">Estructura Orgánica</h5>
+                            <p class="text-xs text-slate-600 mt-2">Transición de un modelo de autogestión hacia un equipo técnico con roles asignados.</p>
                         </div>
                     </div>
                 </div>
@@ -202,66 +455,153 @@
         </main>
     </div>
 
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 md:ml-64 text-center">
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">Secretaría de Educación Jalisco - Dirección de Alfabetización Digital</p>
+    </footer>
+
     <script>
+        // Tab switching logic
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            // Show target
+            document.getElementById(tabId).classList.add('active');
+
+            // Handle Sidebar state
             document.querySelectorAll('aside button').forEach(btn => {
                 btn.classList.remove('sidebar-item-active');
                 btn.classList.add('text-gray-600', 'hover:bg-gray-50');
             });
-            
-            document.getElementById(tabId).classList.add('active');
             const activeBtn = document.getElementById('nav-' + tabId);
-            activeBtn.classList.add('sidebar-item-active');
-            activeBtn.classList.remove('text-gray-600', 'hover:bg-gray-50');
+            if (activeBtn) {
+                activeBtn.classList.add('sidebar-item-active');
+                activeBtn.classList.remove('text-gray-600', 'hover:bg-gray-50');
+            }
+
+            // Trigger scroll to top
+            window.scrollTo(0, 0);
         }
 
+        // Charts Initialization with robustness
         window.onload = function() {
-            const commonOptions = { responsive: true, plugins: { legend: { display: false } } };
+            const colors = ['#1e40af', '#4f46e5', '#3b82f6', '#93c5fd', '#cbd5e1'];
+            
+            // 1. strategyFocusChart (Doughnut)
+            const ctxFocus = document.getElementById('strategyFocusChart');
+            if (ctxFocus) {
+                new Chart(ctxFocus.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['IA Específica', 'Digitalización General'],
+                        datasets: [{ 
+                            data: [9778, 2178], 
+                            backgroundColor: ['#1e40af', '#e2e8f0'], 
+                            borderWidth: 0 
+                        }]
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        cutout: '85%',
+                        plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } }
+                    }
+                });
+            }
 
-            new Chart(document.getElementById('strategyFocusChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['IA Específica', 'Alfabetización General'],
-                    datasets: [{ data: [9778, 2178], backgroundColor: ['#1e40af', '#e2e8f0'], borderWidth: 0 }]
-                },
-                options: { cutout: '80%', ...commonOptions }
-            });
+            // 2. experienceDoughnut (Small)
+            const ctxExp = document.getElementById('experienceDoughnut');
+            if (ctxExp) {
+                new Chart(ctxExp.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Sin Exp.', 'Con Exp.'],
+                        datasets: [{ 
+                            data: [3547, 2613], 
+                            backgroundColor: ['#1e40af', '#f1f5f9'], 
+                            borderWidth: 0 
+                        }]
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        cutout: '80%',
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
 
-            new Chart(document.getElementById('regionalImpactChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Centro', 'Sur', 'Ciénega', 'Valles', 'Sur', 'Costa'],
-                    datasets: [{
-                        data: [5620, 986, 975, 880, 845, 790],
-                        backgroundColor: '#1e40af',
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    ...commonOptions,
-                    scales: { y: { beginAtZero: true, grid: { display: false } }, x: { grid: { display: false } } }
-                }
-            });
+            // 3. regionalImpactChart (Bar)
+            const ctxReg = document.getElementById('regionalImpactChart');
+            if (ctxReg) {
+                new Chart(ctxReg.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Centro', 'Sur', 'Ciénega', 'Valles', 'S. Occid.', 'Altos N.'],
+                        datasets: [{
+                            label: 'Docentes Atendidos',
+                            data: [5620, 986, 975, 880, 845, 790],
+                            backgroundColor: '#1e40af',
+                            borderRadius: 4
+                        }]
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { 
+                            y: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { size: 10 } } },
+                            x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+                        }
+                    }
+                });
+            }
 
-            new Chart(document.getElementById('modalidadChart'), {
-                type: 'polarArea',
-                data: {
-                    labels: ['Aula Google', 'C. Educativo', 'Meet', 'Webinar'],
-                    datasets: [{ data: [42, 36, 12, 10], backgroundColor: ['#1e40af', '#4f46e5', '#3b82f6', '#93c5fd'] }]
-                },
-                options: { plugins: { legend: { position: 'bottom' } } }
-            });
+            // 4. functionChart (Pie)
+            const ctxFunc = document.getElementById('functionChart');
+            if (ctxFunc) {
+                new Chart(ctxFunc.getContext('2d'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['Docentes', 'Directivos', 'Otros'],
+                        datasets: [{ 
+                            data: [7771, 1673, 2512], 
+                            backgroundColor: ['#1e40af', '#4f46e5', '#cbd5e1'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
 
-            new Chart(document.getElementById('funcionChart'), {
-                type: 'pie',
-                data: {
-                    labels: ['Docentes', 'Directivos', 'Otros'],
-                    datasets: [{ data: [7771, 1673, 2512], backgroundColor: ['#1e40af', '#4f46e5', '#cbd5e1'] }]
-                },
-                options: { plugins: { legend: { position: 'bottom' } } }
-            });
-        }
+            // 5. levelsDetailedChart (Polar Area)
+            const ctxLev = document.getElementById('levelsDetailedChart');
+            if (ctxLev) {
+                new Chart(ctxLev.getContext('2d'), {
+                    type: 'polarArea',
+                    data: {
+                        labels: ['Primaria', 'Secundaria', 'Preescolar', 'Especial', 'Telesecundaria', 'Superior'],
+                        datasets: [{ 
+                            data: [3370, 1326, 1112, 135, 62, 18], 
+                            backgroundColor: ['rgba(30, 64, 175, 0.7)', 'rgba(79, 70, 229, 0.7)', 'rgba(16, 185, 129, 0.7)', 'rgba(245, 158, 11, 0.7)', 'rgba(100, 116, 139, 0.7)', 'rgba(203, 213, 225, 0.7)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: { 
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'right', labels: { boxWidth: 10, font: { size: 10 } } } },
+                        scales: { r: { ticks: { display: false } } }
+                    }
+                });
+            }
+        };
     </script>
 </body>
 </html>
